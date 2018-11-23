@@ -258,7 +258,7 @@
   "deployedBytecode": "0x",
   "sourceMap": "",
   "deployedSourceMap": "",
-  "source": "pragma solidity ^0.4.20;\n\ninterface ERC721 {\n    event Transfer(address indexed _from, address indexed _to, uint256 indexed _tokenId);\n    event Approval(address indexed _owner, address indexed _approved, uint256 indexed _tokenId);\n    event ApprovalForAll(address indexed _owner, address indexed _operator, bool _approved);\n\n    function balanceOf(address _owner) external view returns (uint256);\n    function ownerOf(uint256 _tokenId) external view returns (address);\n    function safeTransferFrom(address _from, address _to, uint256 _tokenId, bytes data) external payable;\n    function safeTransferFrom(address _from, address _to, uint256 _tokenId) external payable;\n    function transferFrom(address _from, address _to, uint256 _tokenId) external payable;\n    function approve(address _approved, uint256 _tokenId) external payable;\n    function setApprovalForAll(address _operator, bool _approved) external;\n    function getApproved(uint256 _tokenId) external view returns (address);\n    function isApprovedForAll(address _owner, address _operator) external view returns (bool);\n}\n",
+  "source": "pragma solidity ^0.4.24;\n\ninterface ERC721 {\n    event Transfer(address indexed _from, address indexed _to, uint256 indexed _tokenId);\n    event Approval(address indexed _owner, address indexed _approved, uint256 indexed _tokenId);\n    event ApprovalForAll(address indexed _owner, address indexed _operator, bool _approved);\n\n    function balanceOf(address _owner) external view returns (uint256);\n    function ownerOf(uint256 _tokenId) external view returns (address);\n    function safeTransferFrom(address _from, address _to, uint256 _tokenId, bytes data) external payable;\n    function safeTransferFrom(address _from, address _to, uint256 _tokenId) external payable;\n    function transferFrom(address _from, address _to, uint256 _tokenId) external payable;\n    function approve(address _approved, uint256 _tokenId) external payable;\n    function setApprovalForAll(address _operator, bool _approved) external;\n    function getApproved(uint256 _tokenId) external view returns (address);\n    function isApprovedForAll(address _owner, address _operator) external view returns (bool);\n}\n",
   "sourcePath": "/Users/bymarkone/Source/stars-notary-service/contracts/ERC721.sol",
   "ast": {
     "absolutePath": "/Users/bymarkone/Source/stars-notary-service/contracts/ERC721.sol",
@@ -276,7 +276,7 @@
           "solidity",
           "^",
           "0.4",
-          ".20"
+          ".24"
         ],
         "nodeType": "PragmaDirective",
         "src": "0:24:0"
@@ -1477,7 +1477,7 @@
           "solidity",
           "^",
           "0.4",
-          ".20"
+          ".24"
         ],
         "nodeType": "PragmaDirective",
         "src": "0:24:0"
@@ -2668,5 +2668,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-11-23T02:48:50.659Z"
+  "updatedAt": "2018-11-23T17:35:08.643Z"
 }
