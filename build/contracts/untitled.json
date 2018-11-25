@@ -1,0 +1,43 @@
+pragma solidity ^0.4.24;
+import 'openzeppelin-solidity/contracts/token/ERC721/ERC721.sol';
+contract StarNotary is ERC721 {
+
+struct Star {
+\tstring name;
+\tstring starStory;
+\tstring ra;
+\tstring dec;
+\tstring mag;
+}
+
+mapping(uint256 => Star) public tokenIdToStarInfo;
+mapping(uint256 => uint256) public starsForSale;
+
+function createStar(string memory _name, string memory _starStory, string memory _ra, string memory _dec, string memory _mag, uint256 _tokenId) public {
+\tStar memory newStar = Star(_name, _starStory, _ra, _dec, _mag);
+\ttokenIdToStarInfo[_tokenId] = newStar;
+\t_mint(msg.sender, _tokenId);
+}
+
+function putStarUpForSale(uint256 _tokenId, uint256 _price) public {
+\trequire(this.ownerOf(_tokenId) == msg.sender);
+\tstarsForSale[_tokenId] = _price;
+}
+
+function buyStar(uint256 _tokenId) public payable {
+\trequire(starsForSale[_tokenId] > 0);
+
+\tuint256 starCost = starsForSale[_tokenId];
+\taddress starOwner = this.ownerOf(_tokenId);
+\trequire(msg.value >= starCost);
+
+\t_removeTokenFrom(starOwner, _tokenId);
+\t_addTokenTo(msg.sender, _tokenId);
+
+\tstarOwner.transfer(starCost);
+
+\tif(msg.value > starCost) {
+\t\tmsg.sender.transfer(msg.value - starCost);
+\t}
+}
+}
