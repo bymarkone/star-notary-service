@@ -18,12 +18,16 @@ contract StarNotary is ERC721Token {
 
 	function createStar(string memory _name, string memory _starStory, string memory _ra, string memory _dec, string memory _mag, uint256 _tokenId) public {
 		bytes32 starIdentity = keccak256(abi.encodePacked(_ra, _dec, _mag));
-		require(!existingStars[starIdentity]);
+		checkIfStarExist(starIdentity);
 		existingStars[starIdentity] = true;
 
 		Star memory newStar = Star(_name, _starStory, _ra, _dec, _mag);
 		tokenIdToStarInfo[_tokenId] = newStar;
 		ERC721Token.mint(_tokenId);
+	}
+
+	function checkIfStarExist(bytes32 starIdentity) private {
+		require(!existingStars[starIdentity]);
 	}
 
 	function putStarUpForSale(uint256 _tokenId, uint256 _price) public {
