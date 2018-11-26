@@ -1,0 +1,31 @@
+{
+  "name": "stars-notary-service",
+  "version": "1.0.0",
+  "description": "'''0x5189231b02b5Eb6cd2187f0578c5Cc75aDE15F49'''",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "connect": "^3.6.6",
+    "openzeppelin-solidity": "^2.0.0",
+    "serve-static": "^1.13.2",
+    "truffle-hdwallet-provider": "^0.0.6",
+    "web3": "^1.0.0-beta.35"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bymarkone/star-notary-service.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bymarkone/star-notary-service/issues"
+  },
+  "homepage": "https://github.com/bymarkone/star-notary-service#readme"
+}
