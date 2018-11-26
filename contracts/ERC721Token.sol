@@ -17,6 +17,7 @@ contract ERC721Token is ERC721 {
     }
 
     function mint(uint256 _tokenId) public { 
+				require(tokenToOwner[_tokenId] == address(0), "this token belongs to someone else already");
 
         tokenToOwner[_tokenId] = msg.sender; 
         ownerToBalance[msg.sender] += 1;
