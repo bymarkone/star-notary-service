@@ -1,8 +1,8 @@
 pragma solidity ^0.4.24;
 
-import 'openzeppelin-solidity/contracts/token/ERC721/ERC721.sol';
+import './ERC721Token.sol';
 
-contract StarNotary is ERC721 {
+contract StarNotary is ERC721Token {
 	
 	struct Star {
 		string name;
@@ -18,7 +18,7 @@ contract StarNotary is ERC721 {
 	function createStar(string memory _name, string memory _starStory, string memory _ra, string memory _dec, string memory _mag, uint256 _tokenId) public {
 		Star memory newStar = Star(_name, _starStory, _ra, _dec, _mag);
 		tokenIdToStarInfo[_tokenId] = newStar;
-		_mint(msg.sender, _tokenId);
+		ERC721Token.mint(_tokenId);
 	}
 
 	function putStarUpForSale(uint256 _tokenId, uint256 _price) public {
@@ -33,13 +33,21 @@ contract StarNotary is ERC721 {
 		address starOwner = this.ownerOf(_tokenId);
 		require(msg.value >= starCost);
 
-		_removeTokenFrom(starOwner, _tokenId);
-		_addTokenTo(msg.sender, _tokenId);
+		clearPreviousStarState(_tokenId);
+
+		transferFromHelper(starOwner, msg.sender, _tokenId);
+
+		if(msg.value > starCost) { 
+				msg.sender.transfer(msg.value - starCost);
+		}
 
 		starOwner.transfer(starCost);
+	}
+	function clearPreviousStarState(uint256 _tokenId) private {
+			//clear approvals
+			tokenToApproved[_tokenId] = address(0);
 
-		if(msg.value > starCost) {
-			msg.sender.transfer(msg.value - starCost);
-		}
+			//clear being on sale
+			starsForSale[_tokenId] = 0;
 	}
 }
