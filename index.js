@@ -45,7 +45,7 @@ function starButtonClicked() {
 	starNotary.tokenIdToStarInfo(starId, {from: account, gas: 4000000},
 		function(error, result) {
 				if (!error) {
-						document.getElementById('retrive-output').innerText = result;
+						document.getElementById('retrieve-output').innerText = result;
 				} else {
 						console.log(error);
 						return;
