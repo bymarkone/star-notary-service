@@ -13,6 +13,18 @@ contract('StarNotary', accounts => {
             assert.deepEqual(await this.contract.tokenIdToStarInfo(1), 
 							['A Star!', 'S', 'RA', 'DEC', 'MAG'])
         })
+				
+				it('check if stars existings before creating', async function() {
+						const fromObj = {from: accounts[0]}
+            await this.contract.createStar('Second!', 'S', 'RA', 'DEC', 'MAG', 1, fromObj)
+						
+						try {
+           		 await this.contract.createStar('Second!', 'S', 'RA', 'DEC', 'MAG', 1, fromObj)
+						} catch (err) {
+							assert.equal(err.message, 'VM Exception while processing transaction: revert')
+						}
+
+				})
     })
 
     describe('buying and selling stars', () => { 
