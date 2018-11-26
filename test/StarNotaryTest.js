@@ -17,14 +17,17 @@ contract('StarNotary', accounts => {
 				it('check if stars existings before creating', async function() {
 						const fromObj = {from: accounts[0]}
             await this.contract.createStar('Second!', 'S', 'RA', 'DEC', 'MAG', 1, fromObj)
+
+						const exists = await this.contract.checkIfStarExist(web3.sha3('RA' + 'DEC' + 'MAG'))
+						assert.equal(exists, true)
 						
 						try {
            		 await this.contract.createStar('Second!', 'S', 'RA', 'DEC', 'MAG', 1, fromObj)
 						} catch (err) {
 							assert.equal(err.message, 'VM Exception while processing transaction: revert')
 						}
-
 				})
+
     })
 
     describe('buying and selling stars', () => { 
